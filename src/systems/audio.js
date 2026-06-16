@@ -1,3 +1,5 @@
+import { resolveAssetPath } from '../assetPaths.js'
+
 // Audio paths are immutable so gameplay systems cannot rewrite sound assets.
 export const GAME_AUDIO_PATHS = Object.freeze({
   pistol: Object.freeze({
@@ -35,7 +37,7 @@ function createAudioTemplate(path) {
   // Returning null keeps the module safe to import without changing browser behavior.
   if (typeof Audio === 'undefined') return null
 
-  const audio = new Audio(path)
+  const audio = new Audio(resolveAssetPath(path))
   audio.preload = 'auto'
   return audio
 }

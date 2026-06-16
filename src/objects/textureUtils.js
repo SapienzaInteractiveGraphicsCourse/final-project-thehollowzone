@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 
+import { resolveAssetPath } from '../assetPaths.js'
+
 const textureLoader = new THREE.TextureLoader()
 const textureCache = new Map()
 
@@ -14,8 +16,10 @@ export function loadSharedTexture({
 }) {
   if (!path) return null
 
+  const resolvedPath = resolveAssetPath(path)
+
   const cacheKey = [
-    path,
+    resolvedPath,
     isColorTexture,
     repeat.x,
     repeat.y,
@@ -27,7 +31,7 @@ export function loadSharedTexture({
     return textureCache.get(cacheKey)
   }
 
-  const texture = textureLoader.load(path)
+  const texture = textureLoader.load(resolvedPath)
   texture.channel = channel
   texture.minFilter = THREE.LinearMipmapLinearFilter
   texture.magFilter = THREE.LinearFilter
