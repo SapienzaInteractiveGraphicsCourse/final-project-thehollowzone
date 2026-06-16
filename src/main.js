@@ -185,6 +185,7 @@ const savedPlayerView = new THREE.Quaternion()
 // The flashlight and its target are camera children, so the beam automatically follows first-person mouse look without position calculations each frame.
 
 
+
 const flashlight = lights.playerFlashlightPlaceholder
 scene.add(camera)
 camera.add(flashlight)
