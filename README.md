@@ -2,6 +2,12 @@
 
 Dead Circuit is a Three.js/WebGL first-person survival game for the Interactive Graphics final project. The player explores a locked-down facility, earns points by fighting zombies and repairing barricades, buys access to later rooms, and wins by reaching the extraction objective.
 
+## Play Online
+
+Click here to play the game:
+
+https://sapienzainteractivegraphicscourse.github.io/final-project-thehollowzone/
+
 ## Run
 
 ```bash
