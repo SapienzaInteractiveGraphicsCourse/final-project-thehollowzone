@@ -7,59 +7,45 @@
 **Build tool:** Vite  
 **Main objective:** first-person zombie survival game with a complete playable loop
 
-Dead Circuit is a first-person survival game set inside a locked-down facility. The player starts in the first room with a pistol, fights zombies for points, repairs barricades, buys access to new rooms, collects power-ups, upgrades weapons, and wins by paying for extraction in the final room. The project focuses on a custom Three.js scene, procedural 3D models, manual animation, real-time interaction, collision handling, and game-state management.
+Dead Circuit is a first-person survival game set inside a locked-down facility. The player starts in the first room with a pistol, fights zombies for points, repairs barricades, buys access to new rooms, collects power-ups, upgrades weapons, and wins by paying for extraction in the final room. The project focuses on a custom Three.js scene, procedural 3D modeling, manual animation, real-time interaction, collision handling, and game-state management.
 
 The project was built as a web application rather than a native executable. It can be run locally with `npm run dev` and built for production with `npm run build`. The browser renders the 3D scene using WebGL through Three.js. Game logic is organized into separate modules for player state, arena generation, weapons, zombies, spawning, collision, UI, audio, and power-ups.
 
-## Suggested Figures
-
-The following image placeholders can be replaced with screenshots before exporting the report. Store the images in `docs/report-images/` and keep the same filenames.
+## Project Figures
 
 **Figure 1: Main menu and controls**
 
-Suggested file: `docs/report-images/01-main-menu.png`
-
-Show the opening menu, objective summary, and listed controls. This proves the project has a complete entry screen and explains the controls to the user.
+The main menu introduces the game objective, extraction cost, threat level, and core controls before the player enters the facility.
 
 ![Main menu and controls](report-images/01-main-menu.png)
 
-**Figure 2: Developer overview / arena layout**
+**Figure 2: Developer overview and arena layout**
 
-Suggested file: `docs/report-images/02-developer-overview.png`
-
-Press `O` during a run and capture the overhead OrbitControls view. This is the best screenshot for showing the full multi-room arena, doors, barricades, spawn areas, and extraction path.
+The developer overview shows the full multi-room arena, including the room progression path, door locations, barricade windows, and extraction route.
 
 ![Developer overview of the arena](report-images/02-developer-overview.png)
 
 **Figure 3: First-person gameplay**
 
-Suggested file: `docs/report-images/03-first-person-gameplay.png`
-
-Show the player view with HUD, crosshair, weapon, lighting, fog, and environment textures. Ideally include a zombie or barricade in the frame.
+The first-person gameplay view shows the player HUD, crosshair, weapon model, lighting, fog, textured environment, and active zombie encounter.
 
 ![First-person gameplay](report-images/03-first-person-gameplay.png)
 
-**Figure 4: Hierarchical zombie model**
+**Figure 4: Procedural hierarchical zombie model**
 
-Suggested file: `docs/report-images/04-zombie-model.png`
-
-Capture a close view of a zombie. This supports the technical explanation of the procedural body hierarchy, separate limbs, clothing, wounds, and manual animations.
+The zombie model is assembled from separate procedural body parts, including the torso, head, arms, legs, clothing, wounds, and decals used by the manual animation system.
 
 ![Procedural zombie model](report-images/04-zombie-model.png)
 
-**Figure 5: Power-up or weapon interaction**
+**Figure 5: Interaction prompt and gameplay action**
 
-Suggested file: `docs/report-images/05-interaction-prompt.png`
-
-Show an interaction prompt near a door, weapon pickup, Max Ammo, Double Points, barricade, or extraction marker. This demonstrates the user interaction system.
+The interaction prompt demonstrates the context-sensitive `E` key system used for doors, barricades, weapons, power-ups, and extraction.
 
 ![Interaction prompt](report-images/05-interaction-prompt.png)
 
-**Figure 6: Victory / extraction ending**
+**Figure 6: Victory and extraction ending**
 
-Suggested file: `docs/report-images/06-victory-screen.png`
-
-Use developer mode to add points quickly, unlock the path, pay for extraction, and capture the victory screen. This shows the project has a complete win condition.
+The victory screen confirms the completed win condition after the player reaches the extraction room and pays the required extraction cost.
 
 ![Victory screen](report-images/06-victory-screen.png)
 
@@ -88,13 +74,13 @@ npm install
 npm run dev
 ```
 
-The verification commands are:
+The production build command is:
 
 ```bash
 npm run build
 ```
 
-The project can also be checked manually by running the development server, entering developer view with `O`, adding points with `Q`, unlocking the rooms, and completing extraction.
+The project can also be verified manually by running the development server, entering developer view with `O`, adding points with `Q`, unlocking the rooms, and completing extraction.
 
 ## 2. Libraries, Tools, and External Assets
 
@@ -116,7 +102,7 @@ External visual and audio assets are stored in `public/`. These assets were not 
 - Gameplay audio under `public/audio/`.
 - Google Fonts loaded in `index.html` for the game interface.
 
-The project does **not** use external 3D model files. The zombie, weapons, barricades, rooms, pickups, and props are built procedurally from Three.js primitive geometry. This is important because the hierarchical zombie requirement is implemented directly in code rather than imported from a model file.
+The project does **not** use external 3D model files. The zombie, weapons, barricades, rooms, pickups, and props are built procedurally from Three.js primitive geometry. This is important because the hierarchical zombie model is implemented directly in code rather than imported from a model file.
 
 The audio files include weapon shots and reloads, zombie death, door opening, power-up collection, player death, and victory. The audio system creates reusable audio templates and clones them when sounds play, allowing repeated events such as rifle shots to overlap without cutting each other off.
 
@@ -189,7 +175,7 @@ The player is represented as a gameplay body rather than a visible character mes
 
 The player has health, damage, death, and regeneration systems. The maximum health is 200. Zombie attacks deal 50 damage, so four successful attacks kill a full-health player. After damage, regeneration waits for a delay before restoring health over time. Damage feedback is shown using a red overlay. The damage callback only runs for valid damage, so rejected hits and healing do not trigger the flash.
 
-The camera uses `PointerLockControls` for gameplay. Pointer lock is requested after a user click, which follows browser security rules. When pointer lock exits, the game pauses or shows the correct end screen. The project also includes a developer overview mode using `OrbitControls`. Pressing `O` pauses the run, hides the weapon, disables first-person controls, and places the camera above the map. This makes it easier to demonstrate the arena layout to the professor.
+The camera uses `PointerLockControls` for gameplay. Pointer lock is requested after a user click, which follows browser security rules. When pointer lock exits, the game pauses or shows the correct end screen. The project also includes a developer overview mode using `OrbitControls`. Pressing `O` pauses the run, hides the weapon, disables first-person controls, and places the camera above the map. This makes it possible to inspect the complete arena layout during testing and presentation.
 
 The flashlight is a light attached to the camera. Since it is a camera child, it automatically follows mouse look. The player can toggle it with `F`. This creates a first-person horror atmosphere and makes the dark map more readable during gameplay.
 
@@ -400,7 +386,7 @@ Basic controls:
 - `O`: developer overview camera.
 - `Q`: add 500 points while in developer view.
 
-Developer demonstration mode is available for assessment. Pressing `O` pauses the run and switches to an overhead arena camera. While this view is active, pressing `Q` adds 500 points. This makes it possible to quickly unlock doors, buy weapons, reach the final extraction room, and demonstrate the victory screen without completing a long survival run.
+Developer demonstration mode is available for testing and presentation. Pressing `O` pauses the run and switches to an overhead arena camera. While this view is active, pressing `Q` adds 500 points. This makes it possible to quickly unlock doors, buy weapons, reach the final extraction room, and demonstrate the victory screen without completing a long survival run.
 
 When near an interactive object, the prompt at the bottom of the screen explains what pressing or holding `E` will do. Doors require points. Barricades require holding `E` for a short repair duration. Power-ups and weapons require a single `E` press.
 
